@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <section>
+        <div id="chat"></div>
+        <input type="text" id="name" placeholder="your name" />
+        <input type="text" id="input" disabled="disabled" />
+
+        <!--show the available users on the screen-->
+        <select id="users">
+            <option value="">all</option>
+        </select>
+
+    </section>
+    <!--
+        There is one last thing that we should clarify—the location/source
+        where the /socket.io/socket.io.js file is coming from. It is not downloaded and
+        saved in the project directories from an external source; it is delivered at that location
+        by Socket.IO. That's one of the reasons behind passing the web server object to
+        Socket.IO at the backend.
+    -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        //The bootstrap of the logic
+        window.onload = function () {
+            var Chat = (function () {
+                //addEventListener function, will add an event listener to a DOM element.
+                /*
+                    To make our chat work in Internet Explorer, we need to use attachEvent
+                    instead of addEventListener.
+                */
+                var addEventListener = function (obj, evt, fnc) {
+                    if (obj.addEventListener) { // W3C model
+                        obj.addEventListener(evt, fnc, false);
+                        return true;
+                    } else if (obj.attachEvent) { // Microsoft model
+                        return obj.attachEvent('on' + evt, fnc);
+                    }
+                }
+                var getRandomColor = function () {
+                    var letters = '0123456789ABCDEF'.split('');
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.round(Math.random() * 15)];
+                    }
+                    return color;
+                }
+
+                //use the socket variable to communicate with the server.
+                var socket = io.connect('http://localhost:3000'),
+                    chat = document.querySelector("#chat"),
+                    input = document.querySelector("#input"),
+                    name = document.querySelector("#name"),
+                    color = getRandomColor();
+
+                var users = document.querySelector("#users"),
+                    selectedUser = null,
+                    id = null;
+
+                var send = function (message) {
+                    var username = name.value === '' ? '' : '<strong>' +
+                        name.value + ': </strong>';
+                    //we are sending the message via the socket.emit method and wrapping the text in a colored span element.
+                    socket.emit('send', {
+                        message: '<span style="color:' + color + '">' +
+                            username + message + '</span>',
+                        username: name.value,
+                        toUser: users.value,
+                        fromUser: id
+                    });
+                }
+                var display = function (message) {
+                    chat.innerHTML = chat.innerHTML + message + '<br />';
+                    chat.scrollTop = chat.scrollHeight;
+                }
+
+                addEventListener(input, "keydown", function (e) {
+                    if (e.keyCode === 13) {
+                        send(input.value);
+                        input.value = "";
+                    }
+                });
+
+                addEventListener(users, "change", function (e) {
+                    selectedUser = users.value;
+                });
+
+                //do sth on event welcome - taken from server index.js
+                socket.on('welcome', function (data) {
+                    //store it in our local variable.
+                    id = data.id;
+                    display(data.message);
+                    input.removeAttribute("disabled");
+                    input.focus();
+                }).on('receive', function (data) {
+                    //on receive event - taken from server index.js
+                    display(data.message);
+                }).on('users', function (data) {
+                    var html = '<option value="">all</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        var user = data[i];
+                        if (id != user.id) {
+                            var username = user.name ? user.name : 'user' + (i + 1);
+                            var selected = user.id === selectedUser ? 'selected = "selected"': '';
+                            html += '<option value="' + user.id + '"' + selected + '>' +
+                                username + '</option>';
+                        }
+                    }
+                    users.innerHTML = html;
+
+                });
+
+            })();
+        }
+
+    </script>
+</body>
+
+</html>
