@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <title>Item list</title>
+</head>
+
+<body>
+    <div ng-controller="ItemController">
+        <ul>
+            <li>
+                <label>Id</label>
+                <input type="text" ng-model="item.id" />
+            </li>
+            <li>
+                <label>Name</label>
+                <input type="text" ng-model="item.name" />
+            </li>
+            <li>
+                <label>Qty</label>
+                <input type="number" ng-model="item.qty" />
+            </li>
+            <li>
+                <label>Stock Price</label>
+                <input type="text" ng-model="item.stock_price" />
+            </li>
+        </ul>
+
+        <button ng-click="create()">Add</button>
+        <button ng-click="edit()">Edit</button>
+        <button ng-click="delete()">Delete</button>
+        <ul>
+            <li ng-repeat="m in itemData">
+                {{m.name}} &nbsp; {{m.qty}} &nbsp; {{m.stock_price}} &nbsp; {{m.created_date}} &nbsp; {{m.active}}
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

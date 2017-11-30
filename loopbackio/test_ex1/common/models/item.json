@@ -1,0 +1,40 @@
+{
+  "name": "item",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "qty": {
+      "type": "number"
+    },
+    "stock_price": {
+      "type": "number"
+    },
+    "created_date": {
+      "type": "number"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "orderdetails": {
+      "type": "belongsTo",
+      "model": "orderdetails",
+      "foreignKey": "id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

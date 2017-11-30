@@ -1,0 +1,38 @@
+{
+  "name": "orderdetails",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "order_id": {
+      "type": "number",
+      "required": true
+    },
+    "item_id": {
+      "type": "number",
+      "required": true
+    },
+    "qty": {
+      "type": "number"
+    },
+    "price": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "items": {
+      "type": "hasMany",
+      "model": "item",
+      "foreignKey": "id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
