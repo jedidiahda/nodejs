@@ -1,4 +1,6 @@
+var app = require('../server.js');
 module.export = function(){
+    console.log('hi')
     //An ACL model connects principals to protected resources
     /**
      * The system grants permissions to principals (users or applications, that can be grouped into roles).
@@ -25,5 +27,12 @@ module.export = function(){
             );
         }
     );
+
+    var User = app.models.User;
+    console.log(User)
+    User.create({email: 'foo@bar.com', password: 'bar'}, function(err, userInstance) {
+      console.log(userInstance);
+    });
+
     
 }

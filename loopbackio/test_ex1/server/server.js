@@ -5,6 +5,8 @@ var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
 
+
+
 app.start = function() {
   // start the web server
   return app.listen(function() {
@@ -27,3 +29,16 @@ boot(app, __dirname, function(err) {
   if (require.main === module)
     app.start();
 });
+
+/*
+var appModels = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role'];
+
+var ds = app.dataSources.mysql;
+ds.isActual(appModels, function(err, actual) {
+  if (!actual) {
+    ds.autoupdate(appModels, function(err) {
+      if (err) throw (err);
+    });
+  }
+});
+*/
