@@ -1,0 +1,16 @@
+<div ng-include="'common/partial/navigator.html'"></div>
+<div>item list</div>
+<table >
+    <tr>
+        <th>name</th>
+        <th>qty</th>
+        <th>stock price</th>
+        <th>sell price</th>
+    </tr>
+    <tr ng-repeat="n in items">
+        <td>{{n.name}}</td>
+        <td>{{n.qty}}</td>
+        <td>{{n.stock_price}}</td>
+        <td>{{n.sell_price}}</td>
+    </tr>
+</table>

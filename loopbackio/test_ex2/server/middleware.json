@@ -15,7 +15,11 @@
     "helmet#frameguard": {
       "params": [
         "deny"
+<<<<<<< HEAD
       ]
+=======
+       ]
+>>>>>>> e871ff94802951fa05c03959dd6b34ccf1495997
     },
     "helmet#hsts": {
       "params": {
@@ -40,11 +44,15 @@
       ]
     }
   },
+<<<<<<< HEAD
   "files": {
     "loopback#static": {
       "params": "$!../client"
     }
   },
+=======
+  "files": {},
+>>>>>>> e871ff94802951fa05c03959dd6b34ccf1495997
   "final": {
     "loopback#urlNotFound": {}
   },

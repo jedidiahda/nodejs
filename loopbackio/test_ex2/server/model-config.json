@@ -34,9 +34,12 @@
   "Role": {
     "dataSource": "db",
     "public": false
+<<<<<<< HEAD
   },
   "item": {
     "dataSource": "db",
     "public": true
+=======
+>>>>>>> e871ff94802951fa05c03959dd6b34ccf1495997
   }
 }
