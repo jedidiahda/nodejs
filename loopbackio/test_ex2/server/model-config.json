@@ -14,40 +14,29 @@
     ]
   },
   "User": {
-    "dataSource": "mysql"
+    "dataSource": "db"
   },
   "AccessToken": {
-    "dataSource": "mysql",
+    "dataSource": "db",
     "public": false
   },
   "ACL": {
-    "dataSource": "mysql",
+    "dataSource": "db",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "mysql",
+    "dataSource": "db",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "mysql",
+    "dataSource": "db",
     "public": false
   },
-  "Note": {
-    "dataSource": "mysql"
-  },
   "item": {
-    "dataSource": "mysql",
-    "public": true
-  },
-  "orderdetails": {
-    "dataSource": "mysql",
-    "public": true
-  },
-  "order": {
-    "dataSource": "mysql",
+    "dataSource": "db",
     "public": true
   }
 }

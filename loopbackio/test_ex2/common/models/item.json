@@ -1,5 +1,5 @@
 {
-  "name": "order",
+  "name": "item",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -10,13 +10,10 @@
       "type": "number",
       "required": true
     },
-    "order_date": {
-      "type": "date"
-    },
-    "shipping_address": {
+    "name": {
       "type": "string"
     },
-    "customer_id": {
+    "qty": {
       "type": "number"
     }
   },
