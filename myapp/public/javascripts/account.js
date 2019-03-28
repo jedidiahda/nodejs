@@ -1,27 +1,29 @@
 
 'user strict';
 
-class Account{
-            
-    constructor (){}
+function Account(){
+    const UIControl = {};
 
-    
-
-    init(){
-        $('.butLogin').on('click', this.onButLoginClick);
+    UIControl.$elem = {
+        txtusername: $('.txtusername'),
+        txtpassword: $('.txtpassword'),
+        butLogin: $('.butLogin'),
     }
 
-    login(){
-
+    UIControl.init = () => {
+        UIControl.$elem.butLogin.on('click', UIControl.onButLoginClick);
     }
 
-    onButLoginClick(e){
+    UIControl.onButLoginClick = (e) => {
         console.log(e);
-        console.log('hi')
-    };
+        console.log(UIControl.$elem.txtusername.val())
+    }
 
+    return{
+        UIControl: UIControl,
+    }
 }
 
-let acct = new Account();
+var acct = new Account();
+acct.UIControl.init();
 
-acct.init();
