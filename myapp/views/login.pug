@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1= title
+  p 
+    br
+    label User name
+    |
+    |
+    input(
+        type='textbox'
+        name='txtusername'
+        class='txtusername'
+    )
+    br
+    br
+    label password
+    |
+    |
+    input(
+        type='password'
+        name='txtpassword'
+        class='txtpassword'
+    )
+    br
+    br
+    button(class='butLogin') Login
+    |
+    |
+    button Register
+    
