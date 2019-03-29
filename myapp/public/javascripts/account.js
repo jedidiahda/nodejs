@@ -17,6 +17,18 @@ function Account(){
     UIControl.onButLoginClick = (e) => {
         console.log(e);
         console.log(UIControl.$elem.txtusername.val())
+
+        $.ajax({
+            url:'/account',
+            method: 'POST',
+            data: {username:'tj',password:'foobar'}
+        })
+        // .done(function(res){
+        //     console.log("result",res);
+        // })
+        // .fail(function(error){
+        //     console.log("error",error);
+        // })
     }
 
     return{
