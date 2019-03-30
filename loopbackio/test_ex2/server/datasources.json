@@ -1,6 +1,17 @@
 {
   "db": {
+<<<<<<< HEAD
+    "host": "localhost",
+    "port": 3306,
+    "url": "",
+    "database": "test_db1",
+    "password": "123456",
+    "name": "db",
+    "user": "root",
+    "connector": "mysql"
+=======
     "name": "db",
     "connector": "memory"
+>>>>>>> e871ff94802951fa05c03959dd6b34ccf1495997
   }
 }
