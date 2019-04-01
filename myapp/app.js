@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hash = require('pbkdf2-password')();
 var session = require('express-session');
+var fetch = require('node-fetch');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
