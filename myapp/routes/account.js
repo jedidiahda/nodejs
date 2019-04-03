@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var hash = require('pbkdf2-password')();
-var utils = require('../common/utils');
+var utils = require('../common/utils')();
 
 /* GET login page. */
 router.get('/', function (req, res, next) {
@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
         req.session.user = user;
         req.session.success = 'Authenticated as ' + user.name
                             + ' click to <a href="/logout">logout</a>. ';
-        res.redirect('/');
+        res.redirect('/customer');
       });
     } else {
       req.session.error = 'Authentication failed, please check your '
@@ -32,31 +32,42 @@ router.get('/logout', function (req, res) {
   });
 });
 
-var users = {
-  tj: { name: 'tj' }
-};
+// var users = {
+//   tj: { name: 'tj' }
+// };
 
-hash({ password: 'foobar' }, function (err, pass, salt, hash) {
-  if (err) throw err;
-  // store the salt & hash in the "db"
-  users.tj.salt = salt;
-  users.tj.hash = hash;
-});
+// hash({ password: 'foobar' }, function (err, pass, salt, hash) {
+//   if (err) throw err;
+//   // store the salt & hash in the "db"
+//   users.tj.salt = salt;
+//   users.tj.hash = hash;
+// });
 
 // Authenticate using our plain-object database of doom!
 
-function authenticate(name, pass, fn) {
-  if (!module.parent) console.log('authenticating %s:%s', name, pass);
+function authenticate(username, pass, fn) {
+  if (!module.parent) console.log('authenticating %s:%s', username, pass);
 
-  var user = users[name];
-  
-  if (!user) return fn(new Error('cannot find user'));
-  
-  hash({ password: pass, salt: user.salt }, function (err, pass, salt, hash) {
-    if (err) return fn(err);
-    if (hash === user.hash) return fn(null, user)
-    fn(new Error('invalid password'));
+  getUser({username}).then(user =>{
+    if(user!=null){
+      if(user.password == pass){
+        return fn(null, user);
+      }else{
+        fn(new Error('invalid password'));
+      }
+    }else{
+      return fn(new Error('cannot find user'));
+    }
   });
+
+  
+  // if (!user) return fn(new Error('cannot find user'));
+  
+  // hash({ password: pass, salt: user.salt }, function (err, pass, salt, hash) {
+  //   if (err) return fn(err);
+  //   if (hash === user.hash) return fn(null, user)
+  //   fn(new Error('invalid password'));
+  // });
 
 }
 
@@ -69,8 +80,21 @@ function restrict(req, res, next) {
   }
 }
 
-this.getUser = () => {
-  
+const getUser = (variables) => {
+  return utils.gql({
+    variables,
+    query:`
+      query($username:String!){
+        User(username:$username){
+          id
+          username
+          password
+          active
+          role
+        }
+      }
+    `
+  });
 }
 
 

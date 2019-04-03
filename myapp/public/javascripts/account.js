@@ -1,5 +1,5 @@
 
-'user strict';
+'use strict';
 
 function Account(){
     const UIControl = {};

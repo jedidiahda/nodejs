@@ -1,18 +1,18 @@
 const express = require('express')
-
+const TurndownService = require('turndown')
 const mysql = require('mysql');
 const fetch = require('node-fetch');
 const app = express()
 const port = 3000
 
-
+turndown = new TurndownService();
 
 
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "1234",
-  database: "crypefhy_bitcoindb"
+  password: "123456",
+  database: "crypefhy_wp720"
 });
 
 // con.connect(function(err) {
@@ -71,11 +71,12 @@ app.get('/', (req, res) =>{
 
               let variables = {
                 title: element.post_title,
-                body: element.post_content,
+                content: turndown.turndown(element.post_content),
                 link: element.guid,
                 author: element.post_name,
                 publishdate: element.post_date,
-                imageurl: '',              
+                imageurl: '',   
+                body:'',           
             }
         
               gql({
@@ -88,6 +89,7 @@ app.get('/', (req, res) =>{
                     $body:String!
                     $publishdate:DateTime!
                     $author:String!
+                    $content:String!
                 ){
                     createArticle(
                       data:{
@@ -97,6 +99,7 @@ app.get('/', (req, res) =>{
                         body:$body
                         publishdate: $publishdate
                         author:$author
+                        content:$content
                       }
                     ){
                       id
@@ -110,7 +113,7 @@ app.get('/', (req, res) =>{
                   }
                 `
               }).then(data => {
-                console.log(data)
+                //console.log(data)
               });
 
 

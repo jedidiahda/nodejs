@@ -1,0 +1,52 @@
+extends layout
+
+block content
+    div(class='customer-wrapper')
+        h1= title
+        p Welcome to #{title}
+        p
+            label First Name:
+            |
+            |
+            input(type='textbox', class='txtFirstName')
+        p
+            label Last Name:
+            |
+            |
+            input(type='textbox', class='txtLastName')
+        p
+            label Gender:
+            |
+            |
+            select(name='gender', class='optGender')
+                option(value='Female') Female
+                option(value='Male') Male
+        p
+            label Email:
+            |
+            |
+            input(type='textbox', class='txtEmail')
+        p
+            label Group:
+            |
+            |
+            select(name='group', class='optGroup')
+                option(value='Regular') Regular
+                option(value='VIP') VIP
+        p
+            label Phone:
+            |
+            |
+            input(type='textbox', class='txtPhone')
+        p 
+            label Picture:
+            |
+            |
+            form(action='', method='post', enctype='multipart/form-data')
+                input(type='file', name ='filePicture', class ='filePicture')
+        p
+            input(type='button', class ='butSave', value = 'Save')
+        
+ 
+    script
+        include ../public/javascripts/customer.js

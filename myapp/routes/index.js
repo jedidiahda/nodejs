@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var account = require('./account.js');
+const express = require('express');
+const router = express.Router();
+const account = require('./account.js');
 
 
 /* GET home page. */

@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div(class='customer-list-wrapper')
+    h1= title
+    p Welcome to #{title}
+    |
+    |
+    button(type='button' class='butCreateNew') Create New Customer
+    div(class='customer-list')
+      div(class='customer-header')
+        div(class='row')
+          div(class='col-header') First Name
+          div(class='col-header') Last Name
+      div(class='customer-body')
+      each c in customers
+        div(class='row')
+          div(class='col-item')= c.firstName + ' ' + c.lastName
+          div(class='col-item')= c.gender
+  script
+    include ../public/javascripts/customer-list.js
