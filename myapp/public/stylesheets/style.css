@@ -6,3 +6,28 @@ body {
 a {
   color: #00B7FF;
 }
+
+.m-table{
+  width:100%;
+}
+
+.m-header .m-row{
+  width: auto;
+  clear: both;
+
+}
+
+.m-header .m-row .m-cell{
+  padding: 5px;
+  font-weight: bold;
+  float: left;
+  width: 20%;
+  background-color:#eee;
+  color:#dddd;
+}
+
+.m-body .m-row .m-cell{
+  float:left;
+  display: table-column;
+  width: 20%;
+}

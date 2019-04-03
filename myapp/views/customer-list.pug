@@ -7,15 +7,17 @@ block content
     |
     |
     button(type='button' class='butCreateNew') Create New Customer
-    div(class='customer-list')
-      div(class='customer-header')
-        div(class='row')
-          div(class='col-header') First Name
-          div(class='col-header') Last Name
-      div(class='customer-body')
+    div(class='m-table')
+      div(class='m-header')
+        div(class='m-row')
+          div(class='m-cell') First Name
+          div(class='m-cell') Last Name
+      |
+      |
+      div(class='m-body') 
       each c in customers
-        div(class='row')
-          div(class='col-item')= c.firstName + ' ' + c.lastName
-          div(class='col-item')= c.gender
+        div(class='m-row')          
+            div(class='m-cell')= c.firstName + ' ' + c.lastName
+            div(class='m-cell')= c.gender
   script
     include ../public/javascripts/customer-list.js
