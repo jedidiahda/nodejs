@@ -2,8 +2,8 @@ extends layout
 
 block content
   div(class='customer-list-wrapper')
-    h1= title
-    p Welcome to #{title}
+    h1 Customers
+    p #{title}
     |
     |
     button(type='button' class='butCreateNew') Create New Customer
@@ -11,13 +11,19 @@ block content
       div(class='m-header')
         div(class='m-row')
           div(class='m-cell') First Name
-          div(class='m-cell') Last Name
+          div(class='m-cell') Gender
+          div(class='m-cell') Phone
+          div(class='m-cell') Email
+          div(class='m-cell') &nbsp; 
       |
       |
       div(class='m-body') 
-      each c in customers
-        div(class='m-row')          
+        each c in customers
+          a(class='m-row')
             div(class='m-cell')= c.firstName + ' ' + c.lastName
             div(class='m-cell')= c.gender
+            div(class='m-cell')= c.phone
+            div(class='m-cell')= c.email
+            div(class='m-cell')= ' '
   script
     include ../public/javascripts/customer-list.js

@@ -26,21 +26,28 @@ function Customer(){
                 type: 'POST',
                 url: '/customer/create',
                 data: {
-                    firstName: UIControl.$elem.txtFirstName.val(),
-                    lastName: UIControl.$elem.txtLastName.val(),
-                    gender: UIControl.$elem.optGender.val(),
-                    email: UIControl.$elem.txtEmail.val(),
-                    group: UIControl.$elem.optGroup.val(),
-                    phone: UIControl.$elem.txtPhone.val(),
+                    firstName:  UIControl.$elem.txtFirstName.val(),
+                    lastName:   UIControl.$elem.txtLastName.val(),
+                    gender:     UIControl.$elem.optGender.val(),
+                    email:      UIControl.$elem.txtEmail.val(),
+                    group:      UIControl.$elem.optGroup.val(),
+                    phone:      UIControl.$elem.txtPhone.val(),
                 },
                 success: UIControl.ButSave.onSuccess,
-                error: UIControl.ButSave.onError
+                error:   UIControl.ButSave.onError
             });
         },
-        onSuccess: res => {
-            console.log(res);
+        onSuccess: res => { 
+            if(res.error){
+                console.log(res.error);
+                alert('Cannot add customer');
+                return;
+            }
+            
+            window.location = '/customer';
         },
         onError: (xhr, status, error) => {
+            alert('Cannot add customer');
             console.log(error);
         }
     }

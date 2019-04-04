@@ -1,9 +1,9 @@
 'use strict';
 
 function CustomerList(){
-    const UIControl = {},
-          DataControl = {},
-          $w = $('.customer-list-wrapper');
+    const UIControl     = {},
+          DataControl   = {},
+          $w            = $('.customer-list-wrapper');
 
     UIControl.$elem = {
         butCreateNew: $('.butCreateNew',$w),
