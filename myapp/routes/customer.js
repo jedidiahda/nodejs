@@ -16,14 +16,41 @@ router.get('/create', account.restrict, (req, res, next) => {
 });
 
 router.post('/create', account.restrict, (req, res, next) => {
-    //res.send(req.body);
     customer.save(req.body).then(result => {
         res.send(result);
     });
 });
 
+router.get('/edit', account.restrict, (req, res, next) => {
+    res.render('customer', { 
+        title: 'Edit customer',
+        data: {},
+    });
+});
+
 router.get('/edit/:id', account.restrict, (req, res, next) => {
-    res.send(req.params)
+    customer.fetch_one({
+        id: req.params.id
+    }).then(result => {
+        if(result.error){
+            res.send(result.error);
+        }else{
+            res.render('customer', { 
+                title: 'Edit customer',
+                data: result,
+            });
+        }
+    });
+});
+
+router.post('/delete', account.restrict, (req, res, next) => {
+    next();
+});
+
+router.post('/delete/:id', account.restrict, (req, res, next) => {
+    customer.delete({
+        id: req.params.id
+    }).then(result => res.send(result));
 });
 
 

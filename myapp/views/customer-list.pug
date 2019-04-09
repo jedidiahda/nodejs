@@ -7,23 +7,26 @@ block content
     |
     |
     button(type='button' class='butCreateNew') Create New Customer
+    br
+    br
     div(class='m-table')
       div(class='m-header')
         div(class='m-row')
-          div(class='m-cell') First Name
-          div(class='m-cell') Gender
-          div(class='m-cell') Phone
-          div(class='m-cell') Email
-          div(class='m-cell') &nbsp; 
+          div(class='m-cell', style='width:100px') Name
+          div(class='m-cell', style='width:100px') Gender
+          div(class='m-cell', style='width:100px') Phone
+          div(class='m-cell', style='width:170px') Email
+          div(class='m-cell', style='width:50px') &nbsp;
       |
       |
       div(class='m-body') 
         each c in customers
-          a(class='m-row')
-            div(class='m-cell')= c.firstName + ' ' + c.lastName
-            div(class='m-cell')= c.gender
-            div(class='m-cell')= c.phone
-            div(class='m-cell')= c.email
-            div(class='m-cell')= ' '
+          a(class='m-row', data-id = c.id)
+            div(class='m-cell', style='width:100px')= c.firstName + ' ' + c.lastName
+            div(class='m-cell', style='width:100px')= c.gender
+            div(class='m-cell', style='width:100px')= c.phone
+            div(class='m-cell', style='width:170px')= c.email
+            div(class='m-cell', style='width:50px') 
+              button(class='butDelete') delete
   script
     include ../public/javascripts/customer-list.js

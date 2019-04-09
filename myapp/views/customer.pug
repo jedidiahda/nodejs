@@ -3,41 +3,41 @@ extends layout
 block content
     div(class='customer-wrapper')
         h1= title
-        p Welcome to #{title}
+        p Welcome to #{title} #{data.group}
         p
             label First Name:
             |
             |
-            input(type='textbox', class='txtFirstName')
+            input(type='textbox', class='txtFirstName', value= data ? data.firstName : '')
         p
             label Last Name:
             |
             |
-            input(type='textbox', class='txtLastName')
+            input(type='textbox', class='txtLastName', value= data ? data.lastName : '')
         p
             label Gender:
             |
             |
-            select(name='gender', class='optGender')
+            select(name='gender', class='optGender', value=data ? data.gender : '')
                 option(value='Female') Female
                 option(value='Male') Male
         p
             label Email:
             |
             |
-            input(type='textbox', class='txtEmail')
+            input(type='textbox', class='txtEmail', value=data ? data.email : '')
         p
             label Group:
             |
             |
-            select(name='group', class='optGroup')
-                option(value='Regular') Regular
-                option(value='VIP') VIP
+            select(name='group', class='optGroup', value=data ? data.group : '')
+                option(value='Regular', selected= data ? (data.group == 'Regular' ? true : false) : false) Regular
+                option(value='VIP', selected= data ? (data.group == 'VIP' ? true : false): false) VIP
         p
             label Phone:
             |
             |
-            input(type='textbox', class='txtPhone')
+            input(type='textbox', class='txtPhone', value=data ? data.phone : '')
         p 
             label Picture:
             |

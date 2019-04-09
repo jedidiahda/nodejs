@@ -14,16 +14,15 @@ a {
 }
 
 .m-header .m-row{
-  width: auto;
+  width: 100%;
   display: table-row;
   clear: both;
 }
 
 .m-header .m-row .m-cell{
   display: table-cell;
-  padding: 5px 15px 5px 15px;
+  padding:5px 15px 5px 10px;
   font-weight: bold;
-  width: auto;
   background-color:#eee;
   color: darkslategrey;
   border-bottom: 1px solid #cecece;
@@ -32,7 +31,7 @@ a {
 
 .m-body .m-row{
   display: table-row;
-  width: auto;
+  width: 100%;
   clear: both;
 }
 
@@ -45,8 +44,7 @@ a {
 
 .m-body .m-row .m-cell{
   display: table-cell;
-  width:auto;
   padding:15px 15px 15px 10px;  
   vertical-align: middle;
-  color:#ddd;
+  color:#484848eb;
 }

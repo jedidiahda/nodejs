@@ -25,15 +25,16 @@ function CustomerData(){
             return utils.gql({
                 variables,
                 query: `
-                    query{
-                        Customer(id:"1"){
-                        email
-                        firstName
-                        gender
-                        group
-                        lastName
-                        phone
-                        picture
+                    query($id:ID!){
+                        Customer(id:$id){
+                            id
+                            email
+                            firstName
+                            gender
+                            group
+                            lastName
+                            phone
+                            picture
                         }
                     }
                 `
@@ -71,6 +72,18 @@ function CustomerData(){
         },
         update: () => {
 
+        },
+        delete: (variables) => {
+            return utils.gql({
+                variables,
+                query: `
+                    mutation($id:ID!){
+                        deleteCustomer(id:$id){
+                            id
+                        }
+                  }
+                `
+            });
         }
     }
 }
