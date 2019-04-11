@@ -24,6 +24,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use((req, res, next) =>{
+  try{
+    console.log(getUserId)
+
+    // console.log(req.header.authorization)
+    // const token = req.headers.authorization.split(" ")[1];
+    // console.log("token",token)
+    // jwt.verify(token, key.tokenKey, (err, payload) => {
+    //   console.log("payload",payload)
+    //   if(payload){
+    //     accountRouter.getUserId(payload.userId).then( doc => {
+    //       req.user = doc;
+    //       next();
+    //     });
+    //   }
+    // });
+  }catch(e){
+    next();
+  }
+});
+
+
 // session support
 app.use(session({
   resave: false, // don't save session if unmodified

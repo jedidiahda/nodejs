@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var hash = require('pbkdf2-password')();
 var utils = require('../common/utils')();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const key = require('../key');
 
 /* GET login page. */
 router.get('/', function (req, res, next) {
@@ -48,17 +51,33 @@ router.get('/logout', function (req, res) {
 function authenticate(username, pass, fn) {
   if (!module.parent) console.log('authenticating %s:%s', username, pass);
 
-  getUser({username}).then(user =>{
-    if(user!=null){
-      if(user.password == pass){
-        return fn(null, user);
-      }else{
-        fn(new Error('invalid password'));
-      }
+  bcrypt.compare(pass, user.password, (err, isMatch) => {
+    if(err) return fn(new Error('cannot find user'));
+
+    // if(isMatch) return fn(null, user);
+    // else fn(new Error('invalid password'));
+
+    if(isMatch){
+      let token = jwt.sign({ userId: user.id }, key.tokenKey);
+      return fn(null, user, token);
     }else{
-      return fn(new Error('cannot find user'));
+      fn(new Error('invalid password'));
     }
+
   });
+
+
+  // getUser({username}).then(user =>{
+  //   if(user!=null){
+  //     if(user.password == pass){
+  //       return fn(null, user);
+  //     }else{
+  //       fn(new Error('invalid password'));
+  //     }
+  //   }else{
+  //     return fn(new Error('cannot find user'));
+  //   }
+  // });
 
   
   // if (!user) return fn(new Error('cannot find user'));
@@ -95,6 +114,24 @@ const getUser = (variables) => {
       }
     `
   });
+}
+
+
+const getUserId = (id) => {
+  return utils.gql({
+    id,
+    query:`
+      query($id:ID!){
+        User(id:$id){
+          id
+          username
+          password
+          active
+          role
+        }
+      }
+    `
+  }); 
 }
 
 
