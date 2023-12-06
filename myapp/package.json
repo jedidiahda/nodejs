@@ -7,7 +7,7 @@
     "stop": "node -e \"process.exit(0)\""
   },
   "dependencies": {
-    "bcrypt": "^3.0.5",
+    "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
